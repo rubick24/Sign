@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="resource/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signUpModal">
+    Sign up
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="signUpModal" tabindex="-1" role="dialog" aria-labelledby="signUpModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title text-center" id="signUpModalLabel">Sign Up</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <p class="pull-right" id="usernameMsg"></p>
+                    <input type="text" class="form-control" id="username" >
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <p class="pull-right" id="emailMsg"></p>
+                    <input type="text" class="form-control" id="email" >
+                </div>
+                <div class="form-group" >
+                    <label for="cPassword">Password</label>
+                    <p class="pull-right" id="cPasswordMsg"></p>
+                    <input type="password" class="form-control" id="cPassword" >
+                </div>
+                <div class="form-group" >
+                    <label for="rcPassword">Confirm password</label>
+                    <p class="pull-right" id="rcPasswordMsg"></p>
+                    <input type="password" class="form-control" id="rcPassword" >
+                </div>
+                <div class="form-group">
+                    <a href="#"></a>
+                </div>
+                <div class="form-group" id="errorBox"></div>
+                <button type="button" class="btn btn-default " data-dismiss="modal">Cancel</button>
+                <button id="signUpBtn" class="btn btn-primary pull-right">Sign up</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="resource/jquery.min.js"></script>
+<script type="text/javascript" src="resource/bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    $("#username").blur(function () {
+        $.post(
+                "Controller.php",
+                "code=3&username="+$('#usernam78e').val(),
+                function (result) {
+                    result=strToJson(result);
+                    var usernameMsg = $('#usernameMsg');
+                    if(result.status){
+                        usernameMsg.empty();
+                        usernameMsg.append("<span class=\"glyphicon glyphicon-ok-sign\" style='color:limegreen'></span>");
+                    }
+                    else {
+                        usernameMsg.empty();
+                        usernameMsg.append("<span class=\"glyphicon glyphicon-remove-sign  \" style='color:crimson'></span>"+result.msg);
+                    }
+                }
+        )
+    });
+    $("#email").blur(function () {
+        var preg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+        var email = $('#email').val();
+        if(preg.test(email)){
+            $.post(
+                    "Controller.php",
+                    "code=4&email="+email,
+                    function (result) {
+                        result=strToJson(result);
+                        var emailMsg = $('#emailMsg');
+                        if(result.status){
+                            emailMsg.empty();
+                            emailMsg.append("<span class=\"glyphicon glyphicon-ok-sign\" style='color:limegreen'></span>");
+                        }
+                        else {
+                            emailMsg.empty();
+                            emailMsg.append("<span class=\"glyphicon glyphicon-remove-sign  \" style='color:crimson'></span>"+result.msg);
+                        }
+                    }
+            )
+        }
+        else {
+            var emailMsg = $('#emailMsg');
+            emailMsg.empty();
+            emailMsg.append("<span class=\"glyphicon glyphicon-remove-sign \" style='color:crimson'></span>wrong email format")
+        }
+    });
+    $("#cPassword").blur(function () {
+        var cPasswordMsg = $("#cPasswordMsg");
+        if($("#cPassword").val().length>=6){
+            cPasswordMsg.empty();
+            cPasswordMsg.append("<span class=\"glyphicon glyphicon-ok-sign\" style='color:limegreen'></span>")
+        }
+        else {
+            cPasswordMsg.empty();
+            cPasswordMsg.append("<span class=\"glyphicon glyphicon-remove-sign \" style='color:crimson'></span>password strength is weak")
+        }
+    });
+    $("#rcPassword").blur(function () {
+        var rcPasswordMsg = $("#rcPasswordMsg");
+        if($("#rcPassword").val()==$("#cPassword").val()){
+            rcPasswordMsg.empty();
+            rcPasswordMsg.append("<span class=\"glyphicon glyphicon-ok-sign\" style='color:limegreen'></span>")
+        }
+        else {
+            rcPasswordMsg.empty();
+            rcPasswordMsg.append("<span class=\"glyphicon glyphicon-remove-sign \" style='color:crimson'></span>password don\'t same")
+        }
+    });
+
+
+
+
+    function strToJson(str){
+        return JSON.parse(str);
+    }
+</script>
+</body>
+</html>
+<!--
+<div class=\"dropdown\"><a class=\"dropdown-toggle\" data-target=\"#\" role=\"button\"  id=\"dropLabel\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">".$user->username."<span class=\"caret\"></span></a><ul class=\"dropdown-menu\" aria-labelledby=\"dropLabel\">...</ul></div>
+--!>

@@ -86,6 +86,7 @@ class Database
         if($this->tableExists($table)){
             $insert = 'INSERT INTO '.$table;
             $keys=array_keys($data);
+            $keys=implode(',',$keys);
             $values=array_values($data);
             if(!is_null($keys)){
                 $insert.= ' ('.$keys.')';
@@ -145,7 +146,6 @@ class Database
                     $update .= $keys[$i].'='.$rows[$keys[$i]];
                 }
 
-                // Parse to add commas
                 if($i != count($rows)-1)
                 {
                     $update .= ',';

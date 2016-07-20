@@ -16,6 +16,7 @@ class User
     public $moreInfo;
     public $lasttime;
 
+
     public static function checkName($username){
         $Check = new Database();
         if($Check->connect()){
@@ -50,7 +51,8 @@ class User
                 'email'    => $email,
                 'regtime'  => $regtime,
                 'token'    => $token,
-                'level'    => $level
+                'level'    => $level,
+                'moreinfo' => 1
             );
             if($CreateU->insert("users",$data)){
                 $CreateU->disconnect();

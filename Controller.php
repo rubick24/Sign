@@ -6,7 +6,7 @@ session_start();
 if(isSetNotEmpty($_POST['code'])){
     switch ($_POST['code']){
         case 1: {
-            if(isset($_POST['userinput'])&&!empty($_POST['userinput'])&&isset($_POST['password'])&&!empty($_POST['password'])){
+            if(isSetNotEmpty($_POST['userinput'])&&isSetNotEmpty($_POST['password'])){
                 $userInput = test_input($_POST['userinput']);
                 $password  = md5(test_input($_POST['password']));
                 $User = new User();
@@ -39,7 +39,7 @@ if(isSetNotEmpty($_POST['code'])){
         }
 
         case 3: {
-            if(isset($_POST['username'])&&!empty($_POST['username'])){
+            if(isSetNotEmpty($_POST['username'])){
                 $username=test_input($_POST['username']);
                 if(User::checkName($username)){
                     echo json_encode(['status'=>true]);
@@ -56,7 +56,7 @@ if(isSetNotEmpty($_POST['code'])){
         }
 
         case 4: {
-            if(isset($_POST['email'])&&!empty($_POST['email'])){
+            if(isSetNotEmpty($_POST['email'])){
                 $email = test_input($_POST['email']);
                 if(User::checkEmail($email)){
                     echo json_encode(['status'=>true]);
@@ -68,6 +68,27 @@ if(isSetNotEmpty($_POST['code'])){
             }
             else {
                 echo json_encode(['status'=>false,'msg'=>'email can\'t be empty']);
+                break;
+            }
+        }
+
+        case 5: {
+            if (isSetNotEmpty($_POST['username'])&&isSetNotEmpty($_POST['email'])&&isSetNotEmpty(['password'])){
+                $username = test_input($_POST['username']);
+                $password = md5(test_input($_POST['password']));
+                $email = test_input($_POST['email']);
+
+                if(User::regUser($username,$password,$email)){
+                    echo json_encode(['status'=>true]);
+                }
+                else {
+                    echo json_encode(['status'=>false]);
+                }
+
+                break;
+            }
+            else {
+                echo json_encode(['status'=>false]);
                 break;
             }
         }

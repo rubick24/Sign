@@ -84,7 +84,7 @@ class Database
 
     public function insert($table,$data){
         if($this->tableExists($table)){
-            $insert = 'INSERT INTO '.$table;
+            $insert = "INSERT INTO ".$table;
             $keys=array_keys($data);
             $keys=implode(',',$keys);
             $values=array_values($data);

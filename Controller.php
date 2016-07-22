@@ -93,8 +93,6 @@ if(isSetNotEmpty($_POST['code'])){
             }
         }
 
-
-
         default: {
             echo json_encode(['status'=>false,'msg'=>'unknown request code']);
         }

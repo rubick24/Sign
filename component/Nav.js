@@ -30,7 +30,7 @@ $("#signOut").click(function () {
         "Controller.php",
         "code=2&SignOut=true",
         function () {
-            window.location.reload();
+            location.href = "index.php";
         }
     );
 });

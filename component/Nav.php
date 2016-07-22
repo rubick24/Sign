@@ -27,6 +27,8 @@
                             "<li><a>Signed in as <b>".$user->username."</b></a></li>".
                             "<li role='separator' class='divider'></li>".
                             "<li><a href='".$user->username."'>Your profile</a></li>".
+                            "<li><a href=''>Action</a></li>".
+                            "<li><a href=''>Another action</a></li>".
                             "<li role='separator' class='divider'></li>".
                             "<li><a href='' id='signOut'>Sign out</a></li></ul></li>";
                     }

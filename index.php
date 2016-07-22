@@ -29,7 +29,7 @@ else {
         else{
             switch ($arr[0]){
                 case $User->username :
-                    include 'component/UserProfile.php';
+                    include 'UserProfile.php';
 
             }
         }

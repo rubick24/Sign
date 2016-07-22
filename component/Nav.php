@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="resource/bootstrap/css/bootstrap.min.css " rel="stylesheet">
 </head>
 <body>
 <div id="Nav">
     <nav class="navbar navbar-default" style="margin-bottom: 0" >
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#"><p><img width="28px" style="margin: -5px 10px 0 10px" src="resource/Archlogo.svg">   Logo</p></a>
+                <a class="navbar-brand" href="index.php"><p><img width="28px" style="margin: -5px 10px 0 10px" src="resource/Archlogo.svg">   Logo</p></a>
             </div>
             <div class="navb ar-collapse">
                 <ul class="nav navbar-nav navbar-right" id="userStatus">
@@ -19,7 +18,17 @@
                     if(isset($_SESSION['uid'])&&!empty($_SESSION['uid'])){
                         $user = new User();
                         $user = $user->getUserInfo($_SESSION['uid']);
-                        echo "<p class=\"navbar-text\">Signed in as</p><li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\">".$user->username."<span class=\"caret\"></span></a><ul class=\"dropdown-menu\"><li><a href=\"#\">Action</a></li><li role=\"separator\" class=\"divider\"></li><li><a href=\"#\" id=\"signOut\">Sign out</a></li></ul></li>";
+                        echo
+                            "<li class='dropdown'>".
+
+                            "<a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>".
+                                "<div class='circle'>". strtoupper(substr($user->username,0,1))."</div>"."<span class='caret'></span></a>".
+                            "<ul class='dropdown-menu'>".
+                            "<li><a>Signed in as <b>".$user->username."</b></a></li>".
+                            "<li role='separator' class='divider'></li>".
+                            "<li><a href='".$user->username."'>Your profile</a></li>".
+                            "<li role='separator' class='divider'></li>".
+                            "<li><a href='' id='signOut'>Sign out</a></li></ul></li>";
                     }
                     else echo "<div class='btn-group' style='padding: 0 10px'><button type=\"button\" class=\"btn navbar-btn btn-info\" data-toggle=\"modal\" data-target=\"#signUpModal\">Sign up</button><button type=\"button\" class=\"btn btn-primary navbar-btn\" data-toggle=\"modal\" data-target=\"#signModal\">Sign in</button></div>"
                     ?>
@@ -91,8 +100,5 @@
     </div>
 </div>
 
-<script type="text/javascript" src="resource/jquery.min.js"></script>
-<script type="text/javascript" src="resource/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="component/Nav.js"></script>
 </body>
 </html>

@@ -16,17 +16,21 @@ class Render
     static function index(){
         $dom = \pQuery::parseFile( __DIR__.'\\indexPage.tpl');
         $nav = \pQuery::parseFile(__DIR__.'\\component\\nav.tpl');
+        $jum = \pQuery::parseFile(__DIR__.'\\component\\MainJum.tpl');
         $nav->query('#signed')->remove();
         $div = $nav->select('#Nav');
         $js  = $nav->select('#NavScript');
         $dom->query('.body')->append($div);
         $dom->query('.body')->append($js);
+        $jumb= $jum->select('.jumbotron');
+        $dom->query('.body')->append($jumb);
 
         echo $dom->html();
     }
     static function signedIndex(User $user){
         $dom = \pQuery::parseFile( __DIR__.'\\indexPage.tpl');
         $nav = \pQuery::parseFile(__DIR__.'\\component\\nav.tpl');
+        $jum = \pQuery::parseFile(__DIR__.'\\component\\MainJum.tpl');
         $nav->query('#unSign')->remove();
         $char = strtoupper(substr($user->username,0,1));
         $nav->query('#navCircle')->text($char);
@@ -36,6 +40,8 @@ class Render
         $js  = $nav->select('#NavScript');
         $dom->query('.body')->append($div);
         $dom->query('.body')->append($js);
+        $jumb= $jum->select('.jumbotron');
+        $dom->query('.body')->append($jumb);
 
         echo $dom->html();
     }

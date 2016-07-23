@@ -2,18 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: Deada
- * Date: 2016/7/20
- * Time: 22:01
+ * Date: 2016/7/23
+ * Time: 8:28
  */
-session_start();
 date_default_timezone_set("Asia/Shanghai");
-include './User.php';
-
-if(isset($_SESSION['uid'])&&!is_null($_SESSION['uid'])){
-    $User=new User();
-    $User->getUserInfo($_SESSION['uid']);
-}
-
+define('BASEDIR',__DIR__);
+require_once BASEDIR.'/Common/Loader.php';
+require __DIR__ . '/vendor/autoload.php';
+spl_autoload_register("\\Common\\Loader::autoload");
+//App\Controller\Index::test(3);
+session_start();
 $string=implode("",array_keys($_GET));
 if(!is_null($string)&&!empty($string)){
     $arr = explode("/",$string);
@@ -24,19 +22,18 @@ else {
         $arr = explode("/",$path);
         array_shift($arr);
         if(empty($arr[0])){
-            require_once 'indexPage.php';
+            App\Controller\Index::index();
         }
         else{
             switch ($arr[0]){
                 case $User->username :
-                    include 'UserProfile.php';
+                    //require_once 'UserProfile.php';
 
             }
         }
     }
     else{
-        require_once 'indexPage.php';
+        App\Controller\Index::index();
     }
 
 }
-

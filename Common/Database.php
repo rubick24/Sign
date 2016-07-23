@@ -1,13 +1,18 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: Deada
- * Date: 2016/7/16
- * Time: 16:53
+ * Date: 2016/7/23
+ * Time: 9:33
  */
+
+namespace Common;
+
+
 class Database
 {
+    protected static $db;
+
     private $db_host = '127.0.0.1';
     private $db_user = 'root';
     private $db_pass = 'qqqqqq';
@@ -17,18 +22,22 @@ class Database
     private $result = array();
     private $resultNum;
 
-    public function connect(){
-        if(!($this->con=mysqli_connect($this->db_host,$this->db_user,$this->db_pass))){
+    private function __construct(){
+        if(!($this->con=mysqli_connect($this->db_host,$this->db_user,$this->db_pass,$this->db_name))){
             echo mysqli_error($this->con);
-            return false;
         }
-        if(!mysqli_select_db($this->con,$this->db_name)){
-            echo mysqli_error($this->con);
-            return false;
-        }
-
         mysqli_query($this->con,'set names utf8');
-        return true;
+    }
+    private function __clone(){}
+
+    static function getInstance(){
+        if(self::$db){
+            return self::$db;
+        }
+        else{
+            self::$db = new self();
+            return self::$db;
+        }
     }
 
     public function disconnect(){
@@ -53,12 +62,12 @@ class Database
         else return false;
     }
 
-    public  function select($table,$rows = "*",$where = null,$order = null){
+    function select($table,$rows = "*",$where = null,$order = null){
         if($this->tableExists($table)){
             $q= 'SELECT '.$rows.' FROM '.$table;
-            if(isSetNotEmpty($where))
+            if(isset($where)&&!empty($where))
                 $q .= ' WHERE '.$where;
-            if(isSetNotEmpty($order))
+            if(isset($order)&&!empty($order))
                 $q .= ' ORDER BY '.$order;
             $query = mysqli_query($this->con,$q);
             if($query){
@@ -74,8 +83,8 @@ class Database
                         else $this->result[$key[$n]] = $result[$key[$n]];
                     }
                 }
-               // echo json_encode($this->result);
-                return true;
+                // echo json_encode($this->result);
+                return $this;
             }
             else return false;
         }
@@ -99,7 +108,8 @@ class Database
             $values = implode(',',$values);
             $insert .= ' VALUES ('.$values.')';
             $ins = mysqli_query($this->con,$insert);
-            if($ins) return true;
+            if($ins)
+                return true;
             else return false;
         }
         else return false;
@@ -159,19 +169,8 @@ class Database
         else return false;
     }
 
-    public function getResult(){
-        return $this->result;
+    function getResult(){
+        return ['num'=>$this->resultNum,'result'=>$this->result];
     }
 
-    public function getResultNum(){
-        return $this->resultNum;
-    }
-
-}
-
-function isSetNotEmpty($var){
-    if(isset($var)&&!empty($var)){
-        return true;
-    }
-    else return false;
 }

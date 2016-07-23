@@ -5,7 +5,7 @@
 $("#signBtn").click(function() {
     var data="code=1&userinput="+$('#userInput').val()+"&password="+$('#Password').val();
     $.post(
-        "Controller.php",
+        "index.php",
         data,
         function (result) {
             result=strToJson(result);
@@ -27,12 +27,10 @@ $("#signBtn").click(function() {
 
 $("#signOut").click(function () {
     $.post(
-        "Controller.php",
-        "code=2&SignOut=true",
-        function () {
-            location.href = "index.php";
-        }
+        "index.php",
+        "code=2&SignOut=true"
     );
+    location.href = "index.php";
 });
 
 var checku = 0;
@@ -41,7 +39,7 @@ var checkp = 0;
 var signUpBtn = $("#signUpBtn");
 $("#username").blur(function () {
     $.post(
-        "Controller.php",
+        "index.php",
         "code=3&username="+$('#username').val(),
         function (result) {
             result=strToJson(result);
@@ -68,7 +66,7 @@ $("#email").blur(function () {
     var email = $('#email').val();
     if(preg.test(email)){
         $.post(
-            "Controller.php",
+            "index.php",
             "code=4&email="+email,
             function (result) {
                 result=strToJson(result);
@@ -118,7 +116,7 @@ signUpBtn.click(function () {
     if(checkPassword()){
         var data = "code=5&username="+$("#username").val()+"&email="+$("#email").val()+"&password="+$("#cPassword").val();
         $.post(
-            "Controller.php",
+            "index.php",
             data,
             function (result) {
                 result=strToJson(result);

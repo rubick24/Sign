@@ -10,7 +10,6 @@ define('BASEDIR',__DIR__);
 require_once BASEDIR.'/Common/Loader.php';
 require __DIR__ . '/vendor/autoload.php';
 spl_autoload_register("\\Common\\Loader::autoload");
-//App\Controller\Index::test(3);
 session_start();
 $string=implode("",array_keys($_GET));
 if(!is_null($string)&&!empty($string)){
@@ -25,11 +24,7 @@ else {
             App\Controller\Index::index();
         }
         else{
-            switch ($arr[0]){
-                case $User->username :
-                    //require_once 'UserProfile.php';
-
-            }
+            App\Controller\Index::userProfile($arr[0]);
         }
     }
     else{

@@ -33,17 +33,17 @@ class User
             return self::$user;
         }
     }
-    public static function checkName($username){
+    public static function nameExists($username){
         $Check = Factory::createDatabase()->select("users","uid",'username="'.$username.'"')->getResult();
-        if($Check['num']==0){
-            return true;
+        if($Check['num']==1){
+            return $Check['result']['uid'];
         }
         else return false;
     }
 
-    public static function checkEmail($email){
+    public static function emailExists($email){
         $Check = Factory::createDatabase()->select("users","uid",'email="'.$email.'"')->getResult();
-        if($Check['num']==0){
+        if($Check['num']==1){
             return true;
         }
         else return false;
@@ -94,6 +94,7 @@ class User
     public static function signOut(){
         $_SESSION['uid']=null;
         session_destroy();
+
         echo json_encode(['status'=>true,'msg'=>'sign out success']);
         return true;
     }

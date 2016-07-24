@@ -10,27 +10,23 @@ namespace App\View;
 
 
 use Common\User;
+use pQuery\DomNode;
 
 class Render
 {
-    static function index(){
+    static function nav(){
         $dom = \pQuery::parseFile( __DIR__.'\\indexPage.tpl');
         $nav = \pQuery::parseFile(__DIR__.'\\component\\nav.tpl');
-        $jum = \pQuery::parseFile(__DIR__.'\\component\\MainJum.tpl');
         $nav->query('#signed')->remove();
         $div = $nav->select('#Nav');
         $js  = $nav->select('#NavScript');
         $dom->query('.body')->append($div);
         $dom->query('.body')->append($js);
-        $jumb= $jum->select('.jumbotron');
-        $dom->query('.body')->append($jumb);
-
-        echo $dom->html();
+        return $dom;
     }
-    static function signedIndex(User $user){
+    static function signedNav(User $user){
         $dom = \pQuery::parseFile( __DIR__.'\\indexPage.tpl');
         $nav = \pQuery::parseFile(__DIR__.'\\component\\nav.tpl');
-        $jum = \pQuery::parseFile(__DIR__.'\\component\\MainJum.tpl');
         $nav->query('#unSign')->remove();
         $char = strtoupper(substr($user->username,0,1));
         $nav->query('#navCircle')->text($char);
@@ -40,9 +36,26 @@ class Render
         $js  = $nav->select('#NavScript');
         $dom->query('.body')->append($div);
         $dom->query('.body')->append($js);
+        return  $dom;
+    }
+    static function jum(DomNode $dom){
+        $jum = \pQuery::parseFile(__DIR__.'\\component\\mainJum.tpl');
         $jumb= $jum->select('.jumbotron');
         $dom->query('.body')->append($jumb);
+        return $dom;
+    }
+    static function userProfile(DomNode $dom,$pun){
+        $upf = \pQuery::parseFile(__DIR__.'\\component\\userProfile.tpl');
+        $char = strtoupper(substr($pun,0,1));
+        $upf->query('#userCircle')->text($char);
+        $upf->query('#userName')->text($pun);
+        $upfi= $upf->select('#userProfile');
+        $dom->query('.body')->append($upfi);
+        return $dom;
+    }
 
+
+    static function index(DomNode $dom){
         echo $dom->html();
     }
 }

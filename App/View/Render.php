@@ -44,11 +44,13 @@ class Render
         $dom->query('.body')->append($jumb);
         return $dom;
     }
-    static function userProfile(DomNode $dom,$pun){
+    static function userProfile(DomNode $dom,$data){
         $upf = \pQuery::parseFile(__DIR__.'\\component\\userProfile.tpl');
-        $char = strtoupper(substr($pun,0,1));
+        $char = strtoupper(substr($data['username'],0,1));
         $upf->query('#userCircle')->text($char);
-        $upf->query('#userName')->text($pun);
+        $upf->query('#userName')->text($data['username']);
+        $upf->query('#email')->text($data['email']);
+        $upf->query('#moreInfo')->text($data['moreinfo']);
         $upfi= $upf->select('#userProfile');
         $dom->query('.body')->append($upfi);
         return $dom;

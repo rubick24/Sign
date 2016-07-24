@@ -32,4 +32,3 @@ else {
     }
 
 }
-echo 'no local chnges';

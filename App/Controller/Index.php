@@ -31,13 +31,13 @@ class Index
     static function userProfile($path){
         if(User::nameExists($path)){
             $path = Factory::createUser()->getUserInfo(User::nameExists($path));
-            $pun = $path->username;
+            $data = ['username'=>$path->username,'email'=>$path->email,'moreinfo'=>$path->moreinfo];
             if(isset($_SESSION['uid'])&&!is_null($_SESSION['uid'])){
                 $user = Factory::createUser()->getUserInfo($_SESSION['uid']);
-                Render::index(Render::userProfile(Render::signedNav($user),$pun));
+                Render::index(Render::userProfile(Render::signedNav($user),$data));
             }
             else{
-                Render::index(Render::userProfile(Render::nav(),$pun));
+                Render::index(Render::userProfile(Render::nav(),$data));
             }
         }
         else{

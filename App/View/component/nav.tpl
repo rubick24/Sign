@@ -1,48 +1,52 @@
 
 <div id="Nav">
-    <nav class="navbar navbar-default" style="margin-bottom: 0" >
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#"><p><img width="28px" style="margin: -5px 10px 0 10px" src="resource/Archlogo.svg">   Logo</p></a>
-            </div>
-            <div class="navb ar-collapse">
-                <ul class="nav navbar-nav navbar-right" id="userStatus">
-<!--                    已登录-->
-                    <li id="signed" class='dropdown'>
-                    <a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
-                        <div id="navCircle" style="width:25px;
-                                     height:25px;
-                                     border-radius:50%;
-                                     font-size:16px;
-                                     font-family:'Microsoft YaHei UI',sans-serif;
-                                     color: #ffffff;
-                                     line-height:25px;
-                                     text-align:center;
-                                     background:#009688;
-                                     display: inline-block;">
-                        </div>
-                        <span class='caret'></span>
-                    </a>
-                    <ul class='dropdown-menu'>
-                        <li><a>Signed in as <b id="boldName"></b></a></li>
-                        <li role='separator' class='divider'></li>
-                        <li><a id="profHref" href="#">Your profile</a></li>
-                        <li><a href=''>Action</a></li>
-                        <li><a href=''>Another action</a></li>
-                        <li role='separator' class='divider'></li>
-                        <li><a href='' id='signOut'>Sign out</a></li>
-                    </ul>
-                    </li>
-<!--                    未登录-->
-                    <li id="unSign" class='btn-group' style='padding: 0 10px'>
-                        <button type="button" class="btn navbar-btn btn-info" data-toggle="modal" data-target="#signUpModal">Sign up</button>
-                        <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signModal">Sign in</button>
-                    </li>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-default" style="margin: 0" >
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#"><p><img width="28px" style="margin: -5px 10px 0 10px" src="resource/Archlogo.svg">   Logo</p></a>
+                    </div>
+                    <div class="navb ar-collapse">
+                        <ul class="nav navbar-nav navbar-right" id="userStatus">
+                            <!--                    已登录-->
+                            <li id="signed" class='dropdown'>
+                                <a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
+                                    <div id="navCircle" style="width:25px;
+                                         height:25px;
+                                         border-radius:50%;
+                                         font-size:16px;
+                                         font-family:'Microsoft YaHei UI',sans-serif;
+                                         color: #ffffff;
+                                         line-height:25px;
+                                         text-align:center;
+                                         background:#009688;
+                                         display: inline-block;">
+                                    </div>
+                                    <span class='caret'></span>
+                                </a>
+                                <ul class='dropdown-menu'>
+                                    <li><a>Signed in as <b id="boldName"></b></a></li>
+                                    <li role='separator' class='divider'></li>
+                                    <li><a id="profHref" href="#">Your profile</a></li>
+                                    <li><a href=''>Action</a></li>
+                                    <li><a href=''>Another action</a></li>
+                                    <li role='separator' class='divider'></li>
+                                    <li><a href='' id='signOut'>Sign out</a></li>
+                                </ul>
+                            </li>
+                            <!--                    未登录-->
+                            <li id="unSign" class='btn-group' style='padding: 0 10px'>
+                                <button type="button" class="btn navbar-btn btn-info" data-toggle="modal" data-target="#signUpModal">Sign up</button>
+                                <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signModal">Sign in</button>
+                            </li>
 
-                </ul>
-            </div>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         </div>
-    </nav>
+    </div>
     <div class="modal fade" id="signModal" tabindex="-1" role="dialog" aria-labelledby="signModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

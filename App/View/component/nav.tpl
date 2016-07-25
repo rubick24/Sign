@@ -10,7 +10,7 @@
                     <div class="navb ar-collapse">
                         <ul class="nav navbar-nav navbar-right" id="userStatus">
                             <!--                    已登录-->
-                            <li id="signed" class='dropdown'>
+                            <li id="signed" class='dropdown pull-right'>
                                 <a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
                                     <div id="navCircle" style="width:25px;
                                          height:25px;
@@ -36,7 +36,7 @@
                                 </ul>
                             </li>
                             <!--                    未登录-->
-                            <li id="unSign" class='btn-group' style='padding: 0 10px'>
+                            <li id="unSign" class='btn-group pull-right' style='padding: 0 10px'>
                                 <button type="button" class="btn navbar-btn btn-info" data-toggle="modal" data-target="#signUpModal">Sign up</button>
                                 <button type="button" class="btn btn-primary navbar-btn" data-toggle="modal" data-target="#signModal">Sign in</button>
                             </li>

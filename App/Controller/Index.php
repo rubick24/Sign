@@ -20,10 +20,10 @@ class Index
         else{
             if(isset($_SESSION['uid'])&&!is_null($_SESSION['uid'])){
                 $user = Factory::createUser()->getUserInfo($_SESSION['uid']);
-                Render::index(Render::jum(Render::signedNav($user)));
+                Render::index(Render::fo(Render::jum(Render::signedNav($user))));
             }
             else{
-                Render::index(Render::jum(Render::nav()));
+                Render::index(Render::fo(Render::jum(Render::nav())));
             }
         }
     }
@@ -34,10 +34,10 @@ class Index
             $data = ['username'=>$path->username,'email'=>$path->email,'moreinfo'=>$path->moreinfo];
             if(isset($_SESSION['uid'])&&!is_null($_SESSION['uid'])){
                 $user = Factory::createUser()->getUserInfo($_SESSION['uid']);
-                Render::index(Render::userProfile(Render::signedNav($user),$data));
+                Render::index(Render::fo(Render::userProfile(Render::signedNav($user),$data)));
             }
             else{
-                Render::index(Render::userProfile(Render::nav(),$data));
+                Render::index(Render::fo(Render::userProfile(Render::nav(),$data)));
             }
         }
         else{

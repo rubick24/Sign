@@ -44,6 +44,12 @@ class Render
         $dom->query('.body')->append($jumb);
         return $dom;
     }
+    static function fo(DomNode $dom){
+        $fo = \pQuery::parseFile(__DIR__.'\\component\\footer.tpl');
+        $foo = $fo->select('#footer');
+        $dom->query('.body')->append($foo);
+        return $dom;
+    }
     static function userProfile(DomNode $dom,$data){
         $upf = \pQuery::parseFile(__DIR__.'\\component\\userProfile.tpl');
         $char = strtoupper(substr($data['username'],0,1));

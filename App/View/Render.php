@@ -15,8 +15,8 @@ use pQuery\DomNode;
 class Render
 {
     static function nav(){
-        $dom = \pQuery::parseFile( __DIR__.'\\indexPage.tpl');
-        $nav = \pQuery::parseFile(__DIR__.'\\component\\nav.tpl');
+        $dom = \pQuery::parseFile( __DIR__.'/indexPage.tpl');
+        $nav = \pQuery::parseFile(__DIR__.'/component/nav.tpl');
         $nav->query('#signed')->remove();
         $div = $nav->select('#Nav');
         $js  = $nav->select('#NavScript');
@@ -25,8 +25,8 @@ class Render
         return $dom;
     }
     static function signedNav(User $user){
-        $dom = \pQuery::parseFile( __DIR__.'\\indexPage.tpl');
-        $nav = \pQuery::parseFile(__DIR__.'\\component\\nav.tpl');
+        $dom = \pQuery::parseFile( __DIR__.'/indexPage.tpl');
+        $nav = \pQuery::parseFile(__DIR__.'/component/nav.tpl');
         $nav->query('#unSign')->remove();
         $char = strtoupper(substr($user->username,0,1));
         $nav->query('#navCircle')->text($char);
@@ -39,19 +39,21 @@ class Render
         return  $dom;
     }
     static function jum(DomNode $dom){
-        $jum = \pQuery::parseFile(__DIR__.'\\component\\mainJum.tpl');
+        $jum = \pQuery::parseFile(__DIR__.'/component/mainJum.tpl');
         $jumb= $jum->select('.jumbotron');
+        $js = $jum->select('#mainJumScript');
         $dom->query('.body')->append($jumb);
+        $dom->query('.body')->append($js);
         return $dom;
     }
     static function fo(DomNode $dom){
-        $fo = \pQuery::parseFile(__DIR__.'\\component\\footer.tpl');
+        $fo = \pQuery::parseFile(__DIR__.'/component/footer.tpl');
         $foo = $fo->select('#footer');
         $dom->query('.body')->append($foo);
         return $dom;
     }
     static function userProfile(DomNode $dom,$data){
-        $upf = \pQuery::parseFile(__DIR__.'\\component\\userProfile.tpl');
+        $upf = \pQuery::parseFile(__DIR__.'/component/userProfile.tpl');
         $char = strtoupper(substr($data['username'],0,1));
         $upf->query('#userCircle')->text($char);
         $upf->query('#userName')->text($data['username']);

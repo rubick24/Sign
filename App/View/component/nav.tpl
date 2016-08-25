@@ -7,8 +7,7 @@
                     <div class="navbar-header">
                         <a class="navbar-brand" href="#"><p><img width="28px" style="margin: -5px 10px 0 10px" src="resource/Archlogo.svg">   Logo</p></a>
                     </div>
-                    <div class="navb ar-collapse">
-                        <ul class="nav navbar-nav navbar-right" id="userStatus">
+                    <ul class="nav navbar-nav navbar-right" id="userStatus">
                             <!--                    已登录-->
                             <li id="signed" class='dropdown pull-right'>
                                 <a href='' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'>
@@ -42,7 +41,6 @@
                             </li>
 
                         </ul>
-                    </div>
                 </div>
             </nav>
         </div>

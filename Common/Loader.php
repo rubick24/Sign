@@ -9,6 +9,6 @@ namespace Common;
 
 class Loader{
     static function autoload($class){
-        require_once BASEDIR.'\\'.$class.'.php';
+        require_once str_ireplace('\\','/',$class).'.php';
     }
 }

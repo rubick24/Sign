@@ -11,24 +11,18 @@ require_once BASEDIR.'/Common/Loader.php';
 require __DIR__ . '/vendor/autoload.php';
 spl_autoload_register("\\Common\\Loader::autoload");
 session_start();
-$string=implode("",array_keys($_GET));
-if(!is_null($string)&&!empty($string)){
-    $arr = explode("/",$string);
-}
-else {
-    if(isset($_SERVER['PATH_INFO'])&&!is_null($_SERVER['PATH_INFO'])){
-        $path = $_SERVER['PATH_INFO'];
-        $arr = explode("/",$path);
-        array_shift($arr);
-        if(empty($arr[0])){
-            App\Controller\Index::index();
-        }
-        else{
-            App\Controller\Index::userProfile($arr[0]);
-        }
-    }
-    else{
+if(isset($_SERVER['PATH_INFO'])&&!is_null($_SERVER['PATH_INFO'])){
+    $path = $_SERVER['PATH_INFO'];
+    $arr = explode("/",$path);
+    array_shift($arr);
+    if(empty($arr[0])){
         App\Controller\Index::index();
     }
-
+    else{
+        App\Controller\Index::userProfile($arr[0]);
+    }
 }
+else{
+    App\Controller\Index::index();
+}
+
